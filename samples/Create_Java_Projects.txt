@@ -1,0 +1,6 @@
+
+
+- Simple Eclipse -> New -> Java project
+- Copy desired Java files to 'src' of generated 'project'
+  you must create some 'package' (can't use deafult/no) and put files in them  
+- Project will be automatically build and .class will be generated in 'bin' folder

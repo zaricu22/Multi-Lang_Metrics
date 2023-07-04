@@ -1,0 +1,65 @@
+
+** MULTILINGUAL TOOLS:
+
+* lizard
+- supports most of the popular languages: C/C++, Java, C#, TypeScript, Python, Fortran...
+- It counts: num of comments, cyclomatic complexity, token count of functions, parameter count of functions
+
+We use following command:
+python <Lizard_FOLDER>\lizard.py -l <language> <source_code_directory_location>
+
+* Unified_Code_Count
+- RMax2015/Unified_Code_Count
+- Software Metrics Tool that parses over 20 different programming languages 
+to find Logical and Physical source lines of code, counts keywords and various operators, 
+math function names, etc. and cyclomatic complexity for a given language and then generates various reports
+
+We use following command:
+<Unified_Code_Count_FOLDER>\bin\UCC.exe -dir <source_code_directory_location>
+
+------------------------------------
+
+** JAVA TOOLS:
+
+* Java_4_metrics
+!!! USED VERSION: https://github.com/zaricu22/Java-code-analyzer.git
+- AccuType-911/Java-code-analyzer
+- calculates Java code metrics: McCabe's, Chapin,'s Halstead's metrics and SLOC +
+
+We use following command:
+<Java-code-analyzer_FOLDER>\MSiSvIT_Laba1\bin\Debug\MSiSvIT_Laba1.exe - GUI
+
+* Java_complexity_and_organization
+- Taha248/Java-Code-Analyzer
+- Analyzes Java code: Cyclometric Complexity , Halstead Metrics , Orginization Metrics
+
+We use following command:
+<Java-Code-Analyzer_FOLDER>\bin\Debug\WindowsFormsApplication1.exe - GUI
+
+* Java_halstead_cyclomatic
+- MohamedSaidSallam/halstead_cyclomatic
+- calculates Halstead Metric and Cyclomatic Complexity for a given java file
+
+We use following command:
+<halstead_cyclomatic_FOLDER>\venv\Scripts\python -m halstead_cyclomatic <java_source_code_directory_location>\<java_file_name>
+
+------------------------------------
+
+** C TOOLS:
+
+* C-Static-Analyzer
+!!! USED VERSION: https://github.com/zaricu22/C-Static-Analyzer.git
+- sajedjalil/C-Static-Analyzer
+- Parser, Lines of code, Cyclomatic Complexity, Halstead Complexity, Maintainability Index
+- You can only analyze C files here C++ files can be analyzed but the results are not guaranted
+
+We use following command:
+"<C-Static-Analyzer_FOLDER>\SPLl0714(a)\bin\Debug\SPLl0714.exe" <c_source_code_directory_location>\<c_file_name>
+
+* C_cyclomatic_halstead
+!!! USED VERSION: https://github.com/zaricu22/CyclomaticComplexity-and-HalsteadMetrics.git
+- AhmedEssam17/CyclomaticComplexity-and-HalsteadMetrics
+- Calculates Halstead Metric and Cyclomatic Complexity for a given C file
+
+We use following command:
+python <C_cyclomatic_halstead_FOLDER>\main.py scanFileORDirectory "<c_source_code_directory_location>\[c_file_name]"

@@ -1,0 +1,125 @@
+
+** INSTALLATION
+
+!!! For purpose of this experiment we use SourceMeter plug-in for SonarQube
+to be able to display its results in table form.
+
+- We use following setup:
+
+* SonarQube 8.9.10 LTS Community Edition (https://www.sonarsource.com/products/sonarqube/downloads/historical-downloads/)
+
+You must install Java 11 JDK and change JAVA_HOME path variable
+(https://www.oracle.com/eg/java/technologies/javase/jdk11-archive-downloads.html,
+Oracle account is necessary to download from this link).
+
+To start SonarQube server use: 
+<sonarqube_FOLDER>\bin\<OS_platform>\[StartSonar.bat|sonar.sh]
+Default url is 'localhost:9000', and default credentials is 'admin\admin'.
+
+!!! If you close/kill server and you want to re-run it,
+in some scenarios it is necessary to kill remaining JVM processes.
+
+---------------
+
+* SonarScanner
+(https://docs.sonarqube.org/8.9/analyzing-source-code/scanners/sonarscanner/)
+
+It is recommended to add <sonar_scanner_FOLDER>\bin to Path variables
+
+---------------
+
+* SourceMeter 10.0.0
+(https://www.sourcemeter.com/static/SourceMeter-10.0.0-x64-linux.tgz
+https://www.sourcemeter.com/static/SourceMeter-10.0.0-x64-Windows.zip)
+
+SonarQube GUI -> Administration -> Configuration -> SourceMeter ->
+choose Results directory & provide SourceMeter_FOLDER location & select UploadAllMetrics
+
+
+* SourceMeter Plugin
+(provided on Git: results\SourceMeter plugins)
+
+Put provided plugin files from Git in <sonarqube_FOLDER>\extensions\plugins.
+
+You must install Java 11 JDK and change JAVA_HOME path variable
+(https://www.oracle.com/eg/java/technologies/javase/jdk11-archive-downloads.html,
+Oracle account is necessary to download from this link).
+
+!!! You must install complete Visual Studio 2017 or newer
+to include all needed dependencies by SourceMeter Analyzer 
+(not only MSBuild Tools as it suggested in SourceMeter Docs).
+
+====================================================================================================
+
+** USAGE (on Windows):
+
+* JAVA
+
+First you must create SonarQube project:
+Projects tab -> Add Project(Manually) -> give it some name for key,project,token
+and choose 'Other (for JS, TS, Go, Python, PHP, ...)' and provide your platform
+!!! It is mandatory to save provided command (somewhere by your choice) because you can't see it again (it include important 'sonar.login' info).
+
+- To scan Java_project_files with SonarQube's SourceMeter plugin
+use provided 'samples\RossetaCode_Java_Projects' from Git
+and run following commands in system console:
+
+cd <java_project_FOLDER>
+<provided_sonar_project_command> -D"sonar.java.binaries=.\bin\rosseta"
+
+ex. sonar-scanner.bat -D"sonar.projectKey=aa" -D"sonar.host.url=http://localhost:9000" -D"sonar.login=f8bf92307c0576634b3fdfa382dc3452d4bf2a37" -D"sonar.java.binaries=.\bin\rosseta"
+
+!!! Your sonar.projectKey and java_project_FOLDER shouldn't contains special characters like "< >" or whitespaces.
+
+-------------
+
+* C/C++
+
+!!! On Windows, you shouldn't have 'cmake' command on System Path from other environment like CigWin or MinGW,
+because it will run over 'cmake' command from needed Visual Studio Environment.
+
+- To scan C_project_files with SonarQube's SourceMeter plugin
+use provided 'samples\RossetaCode_C_CMakeNinjaBuild' from Git
+and run following commands in system console:
+
+!!! You can't just use ordinary CMD without activate vcvarsall.bat
+(location depend on the version of Visual Studio: ex. C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build).
+Easier way is to use predefined x86/x64 Native Tools Command Prompt for Visual Studio
+(possible location: C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\VC
+or type "Native Tools" in Windows Search)
+
+cd <c_project_FOLDER>
+<provided_sonar_project_command> -D"sm.cpp.buildfile=.\build-ninja.bat"
+
+ex. sonar-scanner.bat -D"sonar.projectKey=aa" -D"sonar.host.url=http://localhost:9000" -D"sonar.login=f8bf92307c0576634b3fdfa382dc3452d4bf2a37" -D"sm.cpp.buildfile=.\build-ninja.bat"
+
+!!! Your sonar.projectKey and java_project_FOLDER shouldn't contains special characters like "< >" or whitespaces.
+
+====================================================================================================
+
+** EXTRACTION OF RESULTS ON FILE-LEVEL
+
+Unfortunately, SonarQube's SourceMeter plugin do not provide 'FileName' column in 'Method' table.
+Halstead and McCabe metrics are only provided on method-level,
+but if we want to calculate them on file-level we need additional JS script 
+to rename methods with adding filename info.
+Then we can put edited rows in Excel or other spreadsheet tool and delimit columns, sort them, 
+and manually calculate sum or average of metric values by grouping methods based on filename. 
+
+------------------------------------------
+
+We can use following JS scripts in Browser's Console:
+
+Change 'MethodName' in <a> tags to 'MethodName || FileName'.
+let links = document.querySelectorAll("#div3 #sm-widget-table a");
+for (let i = 0; i < links.length; i++) {
+    let filename = links[i].href.match(/(?<=id=).*(?=&)/);
+    links[i].innerHTML = links[i].innerHTML+" || "+filename;
+}
+
+Change 'MethodName' in <a> tags to 'FileName' only.
+let links = document.querySelectorAll("#div3 #sm-widget-table a");
+for (let i = 0; i < links.length; i++) {
+    let filename = links[i].href.match(/(?<=id=).*(?=&)/);
+    links[i].innerHTML = filename;
+}

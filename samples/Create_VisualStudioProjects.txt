@@ -1,0 +1,18 @@
+
+
+- Open VisualStudio
+- File -> New -> Project -> Empty Project
+  * Choose some name for Project and Solution Name 
+  * Choose Location (VS will auto generate folder of given name)
+  * Don't place solution and project in same folder
+- Open Solution Explorer side-tab
+- Delete created 'Project'
+- To create and add new project to existing solution:
+  * File -> New -> Project -> Empty Project
+  * Set project name
+  * Solution: Add to solution
+    (you can create as many empty project as you want)
+- You must manually copy each file to certain 'project folder' with File Explorer
+and again drop files in Source Files for each 'project' in Solution Explorer with VS
+- Don't forget to save solution
+

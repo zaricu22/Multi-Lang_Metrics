@@ -1,0 +1,22 @@
+
+Tool Description (https://msquaredtechnologies.com/Top-10-Reasons.html):
+- Processes the top commercial computer languages C, ANSI C, C++, ANSI C++, Java, and C# for LOC size and code quality analysis
+- Reports in many formats - HTML, XML, CSV, and Text. Create your own with XSL and XML.
+
+!!! Download link of tool (https://msquaredtechnologies.com/RSM-Download.html) 
+is recognized as malware and some browsers do not accept downloading it.
+We successfuly download tool with Microsoft Edge 
+and Avast Antivirus didn't find any security issues during execution,
+but you use it on own risk !!! 
+
+!!! For purpose of experiment we used trial edition of tools
+that accepting of only 20 source files at once.
+
+** Tool provides many reports.
+For purpose of this experiment we found it as useful as three of them:
+
+	Total Summary Metrics
+	Total Verbose Metrics 
+	Verbose Source Code Metrics
+
+All three metrics are on file-level.

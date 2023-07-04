@@ -1,0 +1,60 @@
+
+!!! For purpose of experiment we used 15-days trial edition of tools
+
+** CppDepend/JArchitect work on dynamic project structures with executable files,
+   you should use provided samples\RossetaCode_C_VisualStudioProjects and samples\RossetaCode_Java_Projects
+
+** JArchitect v2023 require JDK11 on system path,
+and provided Java projects shouldn't use default(no) package.
+
+** To get results of CppDepend/JArchitect in table form, 
+   you must use 'Query and Results Tab' and 'Export To ...' tab option.
+
+** Following queries are used in this experiment: 
+
+JAVA/C
+from m in Methods where !m.IsThirdParty
+select new { m,
+  m.NbLinesOfCode, 
+  m.NbLinesOfComment, 
+  m.NbParameters,
+  m.NbVariables,
+  m.NbMethodsCalled, 
+  m.NbMethodsCallingMe
+}
+
+JAVA/C
+from m in Methods where !m.IsThirdParty
+select new { m,
+  m.CyclomaticComplexity,
+  m.MaintainabilityIndex,
+  m.NbUniqueOperands,  
+  m.NbOperands,
+  m.NbUniqueOperators,
+  m.NbOperators,
+  m.ProgramLength,
+  m.VocabularySize,
+  m.ProgramVolume,
+  m.DifficultyLevel,
+  m.ProgramLevel,
+  m.EffortToImplement,
+  m.TimeToImplement
+}
+
+JAVA
+from t in Types where !t.IsThirdParty
+select new { t,
+  t.NbLinesOfCode,
+  t.NbLinesOfComment,
+  t.NbFields,
+  t.NbMethods
+ }
+
+C
+from p in Projects where !p.IsThirdParty
+select new { p,
+  p.NbLinesOfCode,
+  p.NbLinesOfComment,
+  p.NbFields,
+  p.NbMethods
+ }
